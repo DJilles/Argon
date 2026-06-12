@@ -70,16 +70,17 @@
     <!-- Navigation -->
     <ul class="navbar-nav mb-md-3">
 
-        <li>
-            <a href="{{ route(devices_types.index) }}" wire:navigate>
-                <i></i> Tipos de dispositivos
+        <li class="nav-item {{ Request::route()->named('devices_types.index') ? 'active':'' }}">
+            <a  class="nav-link {{ Request::route()->named('devices_types.index') ? 'active' : '' }}"
+                href="{{ route('devices_types.index') }}" wire:navigate>
+                <i class="fas fa-tags text-yellow"></i> Tipos de dispositivos
             </a>
         </li>
 
-        <li class="nav-item {{ Request::route()->named('categories.index') ? 'active' : '' }}">
-            <a class="nav-link {{ Request::route()->named('categories.index') ? 'active' : '' }}"
-                href="{{ route('categories.index') }}" wire:navigate>
-                <i class="fas fa-tags text-yellow"></i> Categories (Normal)
+        <li class="nav-item {{ Request::route()->named('brands.index') ? 'active':'' }}">
+            <a  class="nav-link {{ Request::route()->named('brands.index') ? 'active' : '' }}"
+                href="{{ route('brands.index') }}" wire:navigate>
+                <i class="fas fa-tags text-yellow"></i> Marcas
             </a>
         </li>
 
@@ -90,12 +91,6 @@
             </a>
         </li>
 
-        <li class="nav-item {{ Request::route()->named('animals.index') ? 'active' : '' }}">
-            <a class="nav-link {{ Request::route()->named('animals.index') ? 'active' : '' }}"
-                href="{{ route('animals.index') }}" wire:navigate>
-                <i class="fas fa-dove text-orange"></i> Animals (Imagenes)
-            </a>
-        </li>
 
         <li class="nav-item {{ Request::route()->named('students.index') ? 'active' : '' }}">
             <a class="nav-link {{ Request::route()->named('students.index') ? 'active' : '' }}"

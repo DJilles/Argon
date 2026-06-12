@@ -1,5 +1,5 @@
 @extends('layouts.panel')
-@section('title', 'Tipo de dispositivo')
+@section('title', 'Marcas')
 
 @section('content')
     <div class="row">
@@ -7,9 +7,9 @@
             <div class="card shadow">
                 <div class="card-header border-0">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h3 class="mb-0">Tipos de dispositivos</h3>
-                        <a href="{{ route('devices_types.create') }}" class="btn btn-primary">
-                            <i class="fas fa-plus"></i> Nuevo tipo
+                        <h3 class="mb-0">Marcas</h3>
+                        <a href="{{ route('brands.create') }}" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Nueva Marca
                         </a>
                     </div>
                 </div>
@@ -24,29 +24,29 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($devices_types as $device_type)
+                            @foreach ($brands as $brand)
                                 <tr>
                                     <td>
-                                        <span class="badge badge-pill badge-primary"> {{ $device_type->id }} </span>
+                                        <span class="badge badge-pill badge-primary"> {{ $brand->id }} </span>
                                     </td>
                                     <td>
-                                        {{ $device_type->dev_name }}
+                                        {{ $brand->b_name }}
                                     </td>
 
                                     <td>
-                                        {{ $device_type->dev_description }}
+                                        {{ $brand->b_description }}
                                     </td>
 
                                     <td style="white-space: nowrap; display: flex; align-items: center;">
-                                        <a href="{{ route('devices_types.show', $device_type) }}" class="btn btn-primary btn-sm"
+                                        <a href="{{ route('brands.show', $brand) }}" class="btn btn-primary btn-sm"
                                             style="margin-right: 5px;">
                                             <i class="fas fa-eye"></i> Mostrar
                                         </a>
-                                        <a href="{{ route('devices_types.edit', $device_type) }}" class="btn btn-info btn-sm"
+                                        <a href="{{ route('brands.edit', $brand) }}" class="btn btn-info btn-sm"
                                             style="margin-right: 5px;">
                                             <i class="fas fa-edit"></i> Editar
                                         </a>
-                                        <form action="{{ route('devices_types.destroy', $device_type->id) }}" method="POST"
+                                        <form action="{{ route('brands.destroy', $brand->id) }}" method="POST"
                                             style="display: inline-block; margin: 0; display: flex; align-items: center;">
                                             @csrf
                                             @method('DELETE')
@@ -69,6 +69,3 @@
         </div>
     </div>
 @endsection
-
-
-

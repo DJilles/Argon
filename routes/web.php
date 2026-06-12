@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\Example\AnimalController;
 use App\Http\Controllers\Example\CategoryController;
 use App\Http\Controllers\Example\PostController;
 use App\Http\Controllers\Example\ProductController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CarrerController;
+use App\Http\Controllers\DeviceTypeController;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Products\ProductList;
 use Illuminate\Support\Facades\Route;
@@ -66,7 +68,29 @@ Route::middleware('auth')->group(function () {
         Route::get('/{animal}', [AnimalController::class, 'show'])->name('animals.show');
     });
 
-    
+    // Add the route for DeviceTypeController
+    Route::prefix('/devices_types')->group(function(){
+        Route::get('/',[DeviceTypeController::class, 'index'])->name('devices_types.index');
+        Route::get('/create', [DeviceTypeController::class, 'create'])->name('devices_types.create');
+        Route::post('/', [DeviceTypeController::class, 'store'])->name('devices_types.store');
+        Route::get('/{device}/edit', [DeviceTypeController::class, 'edit'])->name('devices_types.edit');
+        Route::put('/{device}', [DeviceTypeController::class, 'update'])->name('devices_types.update');
+        Route::delete('/{device}', [DeviceTypeController::class, 'destroy'])->name('devices_types.destroy');
+        Route::get('/{device}', [DeviceTypeController::class, 'show'])->name('devices_types.show');
+    });
+
+    //Add Add the route for BrandController
+    Route::prefix('/brands')->group(function(){
+        Route::get('/',[BrandController::class, 'index'])->name('brands.index');
+        Route::get('/create', [BrandController::class, 'create'])->name('brands.create');
+        Route::post('/', [BrandController::class, 'store'])->name('brands.store');
+        Route::get('/{brand}/edit', [BrandController::class, 'edit'])->name('brands.edit');
+        Route::put('/{brand}', [BrandController::class, 'update'])->name('brands.update');
+        Route::delete('/{brand}', [BrandController::class, 'destroy'])->name('brands.destroy');
+        Route::get('/{brand}', [BrandController::class, 'show'])->name('brands.show');
+    });
+
+
 
     //rutas de posts de tipo resource
     Route::resource('/students', StudentController::class);

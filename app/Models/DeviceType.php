@@ -7,10 +7,14 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class DeviceType extends Model
 {
+    protected $table = "devices_types";
+
     protected $fillable = [
         "dev_name",
         "dev_description"
     ];
+
+
 
     public function device_inventory(): HasOne
     {

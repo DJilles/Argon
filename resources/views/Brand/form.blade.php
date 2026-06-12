@@ -3,17 +3,17 @@
     <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
-                <label class="form-control-label" for="dev_name">Nombre</label>
-                <input type="text" id="input-name" name="dev_name" class="form-control form-control-alternative"
-                    placeholder="Nombre" value="{{ old('dev_name', $device_type->dev_name ?? '') }}">
+                <label class="form-control-label" for="b_name">Nombre</label>
+                <input type="text" id="input-name" name="b_name" class="form-control form-control-alternative"
+                    placeholder="Nombre de la marca" value="{{ old('b_name', $brand->b_name ?? '') }}">
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
-                <label class="form-control-label" for="dev_description">Descripción</label>
-                <textarea type="text" id="input-de" name="dev_description" class="form-control form-control-alternative" placeholder="Añada una descripción">{{ old('dev_description') }}</textarea>
+                <label class="form-control-label" for="b_description">Descripción</label>
+                <textarea type="text" id="input-de" name="b_description" class="form-control form-control-alternative" placeholder="Añada una descripción">{{ old('b_description') }}</textarea>
             </div>
         </div>
     </div>
