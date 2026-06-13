@@ -34,6 +34,8 @@ class UserDevRequest extends FormRequest
             'semester'=>'required|in:1,2',
             'devolution_date_due'=>'required|date|after_or_equal:check_out_date',
             'device_condition'=>'required|string|min:3|max:200',
+            'device_inventory_id'=>'required|exists:devices_inventories,id',
+
         ];
     }
 }

@@ -22,10 +22,12 @@ class DeviceInventoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'inv_num'=>'string|required|min:3|max:10|unique:devices_inventories,inv_num' . $this->route('device_inventory'),
-            'serial_num'=>'string|required|min:3|max:12|unique:devices_inventories,serial_num' . $this->route('device_inventory'),
+            'inv_num'=>'string|required|min:3|max:10|unique:devices_inventories,inv_num,' . $this->route('device_inventory'),
+            'serial_num'=>'string|required|min:3|max:12|unique:devices_inventories,serial_num,' . $this->route('device_inventory'),
             'model'=>'string|required|min:3|max:20',
             'inv_condition'=>'string|required|min:3|max:200',
+            'device_type_id'=> 'required|exists:devices_types,id',
+            'brand_id'=> 'required|exists:brands,id',
         ];
     }
 }

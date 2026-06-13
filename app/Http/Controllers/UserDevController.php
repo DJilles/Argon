@@ -12,9 +12,7 @@ class UserDevController extends Controller
 {
     public function index()
     {
-        $users_devs = UserDev::with(
-            'device_inventory:inv_num'
-        )->get();
+        $users_devs = UserDev::with('device_inventory:id,inv_num')->get();
         return view('UserDev.index', compact('users_devs'));
 
     }
@@ -22,7 +20,7 @@ class UserDevController extends Controller
     public function create()
     {
         $user_dev = new UserDev();
-        $devices_inventories = DeviceInventory::all();
+        $devices_inventories = UserDev::all();
         return view('UserDev.create', compact('user_dev', 'devices_inventories'));
     }
 

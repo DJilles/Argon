@@ -7,8 +7,10 @@ use App\Http\Controllers\Example\PostController;
 use App\Http\Controllers\Example\ProductController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CarrerController;
+use App\Http\Controllers\DeviceInventoryController;
 use App\Http\Controllers\DeviceTypeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserDevController;
 use App\Livewire\Products\ProductList;
 use Illuminate\Support\Facades\Route;
 
@@ -79,7 +81,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/{device}', [DeviceTypeController::class, 'show'])->name('devices_types.show');
     });
 
-    //Add Add the route for BrandController
+    //Add the route for BrandController
     Route::prefix('/brands')->group(function(){
         Route::get('/',[BrandController::class, 'index'])->name('brands.index');
         Route::get('/create', [BrandController::class, 'create'])->name('brands.create');
@@ -90,6 +92,27 @@ Route::middleware('auth')->group(function () {
         Route::get('/{brand}', [BrandController::class, 'show'])->name('brands.show');
     });
 
+    //Add the route for DeviceInventoryController
+    Route::prefix('/devices_inventories')->group(function(){
+        Route::get('/',[DeviceInventoryController::class, 'index'])->name('devices_inventories.index');
+        Route::get('/create', [DeviceInventoryController::class, 'create'])->name('devices_inventories.create');
+        Route::post('/', [DeviceInventoryController::class, 'store'])->name('devices_inventories.store');
+        Route::get('/{device_inventory}/edit', [DeviceInventoryController::class, 'edit'])->name('devices_inventories.edit');
+        Route::put('/{device_inventory}', [DeviceInventoryController::class, 'update'])->name('devices_inventories.update');
+        Route::delete('/{device_inventory}', [DeviceInventoryController::class, 'destroy'])->name('devices_inventories.destroy');
+        Route::get('/{device_inventory}', [DeviceInventoryController::class, 'show'])->name('devices_inventories.show');
+    });
+
+    //Add the route for UserDevController
+    Route::prefix('/users_devs')->group(function(){
+        Route::get('/',[UserDevController::class, 'index'])->name('users_devs.index');
+        Route::get('/create', [UserDevController::class, 'create'])->name('users_devs.create');
+        Route::post('/', [UserDevController::class, 'store'])->name('users_devs.store');
+        Route::get('/{device_inventory}/edit', [UserDevController::class, 'edit'])->name('users_devs.edit');
+        Route::put('/{device_inventory}', [UserDevController::class, 'update'])->name('users_devs.update');
+        Route::delete('/{device_inventory}', [UserDevController::class, 'destroy'])->name('users_devs.destroy');
+        Route::get('/{device_inventory}', [UserDevController::class, 'show'])->name('users_devs.show');
+    });
 
 
     //rutas de posts de tipo resource

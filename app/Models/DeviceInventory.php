@@ -8,11 +8,16 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class DeviceInventory extends Model
 {
+
+    protected $table = 'devices_inventories';
     protected $fillable = [
         "inv_num",
         "serial_num",
         "model",
-        "inv_condition"
+        "inv_condition",
+        "device_type_id",
+        "brand_id",
+
     ];
 
     public function user_dev(): HasOne

@@ -12,10 +12,7 @@ class DeviceInventoryController extends Controller
 {
     public function index()
     {
-        $devices_inventories = DeviceInventory::with(
-            'device_type:name',
-            'brand:name'
-        )->get();
+        $devices_inventories = DeviceInventory::with('device_type:id,dev_name','brand:id,b_name')->get();
         return view('DeviceInventory.index', compact('devices_inventories'));
     }
 
@@ -24,9 +21,10 @@ class DeviceInventoryController extends Controller
         $device_inventory = new DeviceInventory();
         $devices_types = DeviceType::all();
         $brands = Brand::all();
-        return view('DeviceType.create', compact('device_inventory','devices_types','brands'));
+        return view('DeviceInventory.create', compact('device_inventory','devices_types','brands'));
     }
     //Mismo que los de tablas fuertes
+
     public function store(DeviceInventoryRequest $request)
     {
         DeviceInventory::create($request->validated());
@@ -58,7 +56,7 @@ class DeviceInventoryController extends Controller
     {
         $device_inventory = DeviceInventory::findOrFail($id);
         $device_inventory->update($request->validated());
-        return redirect()->route('device_inventory.index')->with('success','DeviceInventory actualizado.');
+        return redirect()->route('devices_inventories.index')->with('success','DeviceInventory actualizado.');
     }
 
     //Mismo que los de tablas fuertes
@@ -66,7 +64,7 @@ class DeviceInventoryController extends Controller
     {
         $device_inventory = DeviceInventory::findOrFail($id);
         $device_inventory->delete();
-        return redirect()->route('device_inventory.index')->with('success','DeviceInventory eliminado.');
+        return redirect()->route('devices_inventories.index')->with('success','DeviceInventory eliminado.');
     }
 
 

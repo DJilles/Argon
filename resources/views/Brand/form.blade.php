@@ -13,7 +13,7 @@
         <div class="col-lg-6">
             <div class="form-group">
                 <label class="form-control-label" for="b_description">Descripción</label>
-                <textarea type="text" id="input-de" name="b_description" class="form-control form-control-alternative" placeholder="Añada una descripción">{{ old('b_description') }}</textarea>
+                <textarea type="text" id="input-de" name="b_description" class="form-control form-control-alternative" placeholder="Añada una descripción">{{ old('b_description',$brand->b_description ?? '') }}</textarea>
             </div>
         </div>
     </div>

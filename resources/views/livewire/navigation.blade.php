@@ -73,7 +73,7 @@
         <li class="nav-item {{ Request::route()->named('devices_types.index') ? 'active':'' }}">
             <a  class="nav-link {{ Request::route()->named('devices_types.index') ? 'active' : '' }}"
                 href="{{ route('devices_types.index') }}" wire:navigate>
-                <i class="fas fa-tags text-yellow"></i> Tipos de dispositivos
+                <i class="fas fa-th-large text-yellow"></i> Tipos de dispositivos
             </a>
         </li>
 
@@ -81,6 +81,20 @@
             <a  class="nav-link {{ Request::route()->named('brands.index') ? 'active' : '' }}"
                 href="{{ route('brands.index') }}" wire:navigate>
                 <i class="fas fa-tags text-yellow"></i> Marcas
+            </a>
+        </li>
+
+        <li class="nav-item {{ Request::route()->named('devices_inventories.index') ? 'active':'' }}">
+            <a  class="nav-link {{ Request::route()->named('devices_inventories.index') ? 'active' : '' }}"
+                href="{{ route('devices_inventories.index') }}" wire:navigate>
+                <i class="fas fa-boxes text-yellow"></i> Inventario de dispositivos
+            </a>
+        </li>
+
+        <li class="nav-item {{ Request::route()->named('users_devs.index') ? 'active':'' }}">
+            <a  class="nav-link {{ Request::route()->named('users_devs.index') ? 'active' : '' }}"
+                href="{{ route('users_devs.index') }}" wire:navigate>
+                <i class="fas fa-user text-green"></i> Usuarios (Préstamos)
             </a>
         </li>
 

@@ -22,7 +22,7 @@ class BrandRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'b_name'=>'string|required|min:3|max:50|unique:brands,b_name' .$this->route('brand'),
+            'b_name'=>'string|required|min:3|max:50|unique:brands,b_name,' .$this->route('brand'),
             'b_description'=>'string|required|min:3|max:200'
         ];
     }
