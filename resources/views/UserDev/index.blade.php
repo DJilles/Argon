@@ -41,7 +41,7 @@
                                         <span class="badge badge-pill badge-primary"> {{ $user_dev->id }} </span>
                                     </td>
                                     <td>
-                                        {{ $user_dev->rol }}
+                                        {{ $user_dev->rol_completo }}
                                     </td>
 
                                     <td>
@@ -53,7 +53,7 @@
                                     </td>
 
                                     <td>
-                                        {{ $user_dev->gender }}
+                                        {{ $user_dev->gender_completo }}
                                     </td>
 
                                     <td>
@@ -77,7 +77,7 @@
                                     </td>
 
                                      <td>
-                                        {{ $user_dev->semester}}
+                                        {{ $user_dev->semester_completo}}
                                     </td>
 
                                      <td>

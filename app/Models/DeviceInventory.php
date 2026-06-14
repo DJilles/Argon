@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class DeviceInventory extends Model
 {
 
     protected $table = 'devices_inventories';
+    
     protected $fillable = [
         "inv_num",
         "serial_num",
@@ -20,9 +22,9 @@ class DeviceInventory extends Model
 
     ];
 
-    public function user_dev(): HasOne
+    public function user_dev(): HasMany
     {
-        return $this->hasOne(UserDev::class);
+        return $this->hasMany(UserDev::class, 'device_inventory_id');
     }
 
     public function device_type() : BelongsTo

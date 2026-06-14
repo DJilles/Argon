@@ -20,14 +20,35 @@ class UserDevController extends Controller
     public function create()
     {
         $user_dev = new UserDev();
-        $devices_inventories = UserDev::all();
-        return view('UserDev.create', compact('user_dev', 'devices_inventories'));
+        $devices_inventories = DeviceInventory::query()->whereDoesntHave('user_dev')->get();
+
+        $roles = [
+            't'=> 'Profesor',
+            's'=> 'Estudiante',
+            'w'=> 'Trabajador del centro'
+        ];
+
+        $gender = [
+            'f'=> 'Femenino',
+            'm'=> 'Masculino'
+        ];
+
+        $semester = [
+            1 => 'I Semestre',
+            2 => 'II Semestre',
+        ];
+
+        return view('UserDev.create', compact('user_dev', 'devices_inventories', 'roles','gender','semester'));
     }
 
     public function store(UserDevRequest $request)
     {
-        UserDev::create($request->validated());
-        return redirect()->route('users_devs.index')->with('success','UserDev creado.');
+        $data = array_merge($request->validated(),[
+            'check_out_date' =>now()
+        ]);
+
+        UserDev::create($data);
+        return redirect()->route('users_devs.index')->with('success','Registro creado con éxito.');
     }
 
     public function show(string $id)
@@ -40,7 +61,24 @@ class UserDevController extends Controller
     {
         $user_dev = UserDev::findOrFail($id);
         $devices_inventories = DeviceInventory::all();
-        return view('UserDev.edit',compact('user_dev','devices_inventories'));
+
+        $roles = [
+            't'=> 'Profesor',
+            's'=> 'Estudiante',
+            'w'=> 'Trabajador del centro'
+        ];
+
+        $gender = [
+            'f'=> 'Femenino',
+            'm'=> 'Masculino'
+        ];
+
+        $semester = [
+            1 => 'I Semestre',
+            2 => 'II Semestre',
+        ];
+
+        return view('UserDev.edit',compact('user_dev','devices_inventories','roles','gender','semester'));
     }
 
     public function update(UserDevRequest $request, string $id)
