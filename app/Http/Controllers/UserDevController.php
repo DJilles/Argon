@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserDevRequest;
 use App\Models\DeviceInventory;
 use App\Models\UserDev;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\FuncCall;
 
@@ -20,7 +21,17 @@ class UserDevController extends Controller
     public function create()
     {
         $user_dev = new UserDev();
-        $devices_inventories = DeviceInventory::query()->whereDoesntHave('user_dev')->get();
+
+        // Muestra los Ids de todos los dispositivos prestados alguna vez
+        $loans = DB::table('users_devs')->pluck('device_inventory_id')->toArray();
+
+        //Dispositivos ya regresados
+        $returned = DB::table('check_in_logs')->pluck('device_inventory_id')->toArray();
+
+        $used = array_diff($loans,$returned);
+
+
+        $devices_inventories = DeviceInventory::query()->whereNotIn('id',$used)->get();
 
         $roles = [
             't'=> 'Profesor',
@@ -85,13 +96,13 @@ class UserDevController extends Controller
     {
         $user_dev = UserDev::findOrFail($id);
         $user_dev->update($request->validated());
-        return redirect()->route('user_dev.index')->with('success','UserDev actualizado.');
+        return redirect()->route('users_devs.index')->with('success','UserDev actualizado.');
     }
 
     public function destroy(string $id)
     {
         $user_dev = UserDev::findOrFail($id);
         $user_dev->delete();
-        return redirect()->route('user_dev.index')->with('success','UserDev eliminado.');
+        return redirect()->route('users_devs.index')->with('success','UserDev eliminado.');
     }
 }

@@ -9,7 +9,10 @@ class CheckInLog extends Model
 {
     protected $fillable = [
         "in_date",
-        "return_condition"
+        "return_condition",
+        'user_dev_id',
+        'device_inventory_id'
+
     ];
 
     public function user_dev(): BelongsTo

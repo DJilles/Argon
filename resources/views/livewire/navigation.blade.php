@@ -66,7 +66,7 @@
     <!-- Divider -->
     <hr class="my-3">
     <!-- Heading -->
-    <h6 class="navbar-heading text-muted">Ejemplos</h6>
+    <h6 class="navbar-heading text-muted">Administración</h6>
     <!-- Navigation -->
     <ul class="navbar-nav mb-md-3">
 
@@ -98,25 +98,10 @@
             </a>
         </li>
 
-        <li class="nav-item {{ Request::route()->named('posts.index') ? 'active' : '' }}">
-            <a class="nav-link {{ Request::route()->named('posts.index') ? 'active' : '' }}"
-                href="{{ route('posts.index') }}" wire:navigate>
-                <i class="fas fa-newspaper text-green"></i> Posts (Relacionado)
-            </a>
-        </li>
-
-
-        <li class="nav-item {{ Request::route()->named('students.index') ? 'active' : '' }}">
-            <a class="nav-link {{ Request::route()->named('students.index') ? 'active' : '' }}"
-                href="{{ route('students.index') }}" wire:navigate>
-                <i class="fas fa-dove text-orange"></i> Estudiantes
-            </a>
-        </li>
-
-        <li class="nav-item {{ Request::route()->named('carrers.index') ? 'active' : '' }}">
-            <a class="nav-link {{ Request::route()->named('carrers.index') ? 'active' : '' }}"
-                href="{{ route('carrers.index') }}" wire:navigate>
-                <i class="fas fa-dove text-orange"></i> Carreras
+        <li class="nav-item {{ Request::route()->named('check_in_logs.index') ? 'active':'' }}">
+            <a  class="nav-link {{ Request::route()->named('check_in_logs.index') ? 'active' : '' }}"
+                href="{{ route('check_in_logs.index') }}" wire:navigate>
+                <i class="fas fa-exchange-alt text-blue"></i> Devolver equipo(s)
             </a>
         </li>
     </ul>

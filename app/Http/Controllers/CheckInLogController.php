@@ -24,8 +24,12 @@ class CheckInLogController extends Controller
 
     public function store(CheckInLogRequest $request)
     {
-        CheckInLog::create($request->validated());
-        return redirect()->route('check_in_logs.index')->with('success','CheckInLog creado.');
+        $data = $request->validated();
+        $loans = UserDev::findOrFail($data['user_dev_id']);
+        $data['device_inventory_id'] = $loans->device_inventory_id;
+
+        CheckInLog::create($data);
+        return redirect()->route('check_in_logs.index')->with('success','Equipo devuelto con éxito. El dispositivo ya está disponible nuevamente.');
     }
 
     public function show(string $id)
@@ -52,7 +56,7 @@ class CheckInLogController extends Controller
     {
         $check_in_log = CheckInLog::findOrFail($id);
         $check_in_log->delete();
-        return redirect()->route('check_in_log.index')->with('success','CheckInLog eliminado.')
+        return redirect()->route('check_in_log.index')->with('success','CheckInLog eliminado.');
     }
 
 }

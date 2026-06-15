@@ -17,7 +17,10 @@ return new class extends Migration
             $table->dateTime("in_date");
             $table->string("return_condition",200);
 
-            $table->foreignId("user_id")->constrained("users")
+            $table->foreignId("user_dev_id")->constrained("users_devs")
+            ->onUpdate("cascade")->onDelete("cascade");
+
+            $table->foreignId("device_inventory_id")->constrained("devices_inventories")
             ->onUpdate("cascade")->onDelete("cascade");
 
 

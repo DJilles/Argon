@@ -22,8 +22,9 @@ class CheckInLogRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'in_date'=>'required|date|before_or_equal:today',
-            'return_condition'=>'string|required|min:3|max:200'
+            'in_date'=>'required|date|before_or_equal:now',
+            'return_condition'=>'string|required|min:3|max:200',
+            'user_dev_id'=>'required|exists:users_devs,id',
         ];
     }
 }

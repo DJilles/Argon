@@ -25,6 +25,10 @@ class UserDevRequest extends FormRequest
 
         $userId = $this->route('user_dev') ?? $this->route('id') ?? $this->id;
 
+        if (blank($userId)){
+            $userId = $this->segment(2);
+        }
+
         if (is_object($userId)){
             $userId = $userId->id;
         }

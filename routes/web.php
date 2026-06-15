@@ -7,6 +7,7 @@ use App\Http\Controllers\Example\PostController;
 use App\Http\Controllers\Example\ProductController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CarrerController;
+use App\Http\Controllers\CheckInLogController;
 use App\Http\Controllers\DeviceInventoryController;
 use App\Http\Controllers\DeviceTypeController;
 use App\Http\Controllers\ProfileController;
@@ -39,36 +40,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/show', fn() => view('examples.ejemplo.show'))->name('ejemplo.show');
     });
 
-    //rutas con controlador y prefix
-    Route::prefix('/categories')->group(function () {
-        Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
-        Route::get('/create', [CategoryController::class, 'create'])->name('categories.create');
-        Route::post('/', [CategoryController::class, 'store'])->name('categories.store');
-        Route::get('/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
-        Route::put('/{category}', [CategoryController::class, 'update'])->name('categories.update');
-        Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
-        Route::get('/{category}', [CategoryController::class, 'show'])->name('categories.show');
-    });
 
-    Route::prefix('/posts')->group(function () {
-        Route::get('/', [PostController::class, 'index'])->name('posts.index');
-        Route::get('/create', [PostController::class, 'create'])->name('posts.create');
-        Route::post('/', [PostController::class, 'store'])->name('posts.store');
-        Route::get('/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
-        Route::put('/{post}', [PostController::class, 'update'])->name('posts.update');
-        Route::delete('/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
-        Route::get('/{post}', [PostController::class, 'show'])->name('posts.show');
-    });
-
-    Route::prefix('/animals')->group(function () {
-        Route::get('/', [AnimalController::class, 'index'])->name('animals.index');
-        Route::get('/create', [AnimalController::class, 'create'])->name('animals.create');
-        Route::post('/', [AnimalController::class, 'store'])->name('animals.store');
-        Route::get('/{animal}/edit', [AnimalController::class, 'edit'])->name('animals.edit');
-        Route::put('/{animal}', [AnimalController::class, 'update'])->name('animals.update');
-        Route::delete('/{animal}', [AnimalController::class, 'destroy'])->name('animals.destroy');
-        Route::get('/{animal}', [AnimalController::class, 'show'])->name('animals.show');
-    });
 
     // Add the route for DeviceTypeController
     Route::prefix('/devices_types')->group(function(){
@@ -112,6 +84,17 @@ Route::middleware('auth')->group(function () {
         Route::put('/{device_inventory}', [UserDevController::class, 'update'])->name('users_devs.update');
         Route::delete('/{device_inventory}', [UserDevController::class, 'destroy'])->name('users_devs.destroy');
         Route::get('/{device_inventory}', [UserDevController::class, 'show'])->name('users_devs.show');
+    });
+
+    //Add the route for CheckInLogController
+    Route::prefix('/check_in_logs')->group(function(){
+        Route::get('/',[CheckInLogController::class, 'index'])->name('check_in_logs.index');
+        Route::get('/create', [CheckInLogController::class, 'create'])->name('check_in_logs.create');
+        Route::post('/', [CheckInLogController::class, 'store'])->name('check_in_logs.store');
+        Route::get('/{check_in_log}/edit', [CheckInLogController::class, 'edit'])->name('check_in_logs.edit');
+        Route::put('/{check_in_log}', [CheckInLogController::class, 'update'])->name('check_in_logs.update');
+        Route::delete('/{check_in_log}', [CheckInLogController::class, 'destroy'])->name('check_in_logs.destroy');
+        Route::get('/{check_in_log}', [CheckInLogController::class, 'show'])->name('check_in_logs.show');
     });
 
 
