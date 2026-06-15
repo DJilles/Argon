@@ -99,8 +99,7 @@ Route::middleware('auth')->group(function () {
 
 
     //rutas de posts de tipo resource
-    Route::resource('/students', StudentController::class);
-    Route::resource('/carrers', CarrerController::class);
+
 
     // Route::resource('/categories', CategoryController::class);
     // Route::resource('/animals', AnimalController::class);

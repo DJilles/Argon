@@ -33,8 +33,8 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <!-- Brand -->
-            <a class="navbar-brand pt-0" href="#">
-                <img src="{{ asset('img/brand/blue.png') }}" class="navbar-brand-img" alt="...">
+            <a class="navbar-brand pt-0" href="#" style="max-height: 40px;">
+                <img src="{{ asset('img/brand/CTB.png') }}" class="navbar-brand-img" alt="...">
             </a>
             <!-- User -->
             @include('includes.mobile_menu')

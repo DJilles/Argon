@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-6 collapse-brand">
                 <a href="#">
-                    <img src="{{ asset('img/brand/blue.png') }}">
+                    <img src="{{ asset('img/CTB.png') }}" style="max-height: 40px; object-fit: contain;">
                 </a>
             </div>
             <div class="col-6 collapse-close">
@@ -27,18 +27,7 @@
     </ul>
     <!-- Divider -->
     <hr class="my-3">
-    <!-- Heading -->
-    <h6 class="navbar-heading text-muted">Panel de Administración</h6>
-    <ul class="navbar-nav">
-        <li class="nav-item {{ Request::route()->named('ejemplo.index') ? 'active' : '' }}">
-            <a class="nav-link {{ Request::route()->named('ejemplo.index') ? 'active' : '' }}"
-                href="{{ route('ejemplo.index') }}" wire:navigate>
-                <i class="fas fa-book text-purple"></i> Ejemplo
-            </a>
-        </li>
-    </ul>
     <!-- Divider -->
-    <hr class="my-3">
     <!-- Heading -->
     <h6 class="navbar-heading text-muted">Otras Acciones</h6>
     <!-- Navigation -->
