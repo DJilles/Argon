@@ -9,7 +9,7 @@
 
                     <div class="card-body">
                         <div class="mb-4 text-sm text-gray-600">
-                            {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
+                            {{ __('Por favor escriba la contraseña antes de continuar') }}
                         </div>
 
                         <form method="POST" action="{{ route('password.confirm') }}">

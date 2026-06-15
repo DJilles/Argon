@@ -25,7 +25,7 @@
         <nav class="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark">
             <div class="container px-4">
                 <a class="navbar-brand" href="#">
-                    <img src="{{ asset('img/brand/white.png') }}" />
+                    <img src="{{ asset('img/brand/CTB.png') }}" />
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-main"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

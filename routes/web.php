@@ -1,12 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\BrandController;
-use App\Http\Controllers\Example\AnimalController;
-use App\Http\Controllers\Example\CategoryController;
-use App\Http\Controllers\Example\PostController;
-use App\Http\Controllers\Example\ProductController;
-use App\Http\Controllers\StudentController;
-use App\Http\Controllers\CarrerController;
 use App\Http\Controllers\CheckInLogController;
 use App\Http\Controllers\DeviceInventoryController;
 use App\Http\Controllers\DeviceTypeController;
@@ -23,6 +18,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+
 Route::middleware('auth')->group(function () {
 
     Route::prefix('/profile')->group(function () {
@@ -33,12 +30,12 @@ Route::middleware('auth')->group(function () {
     });
 
     //rutas de ejemplo sin controlador con prefijo
-    Route::prefix('/ejemplo')->group(function () {
-        Route::get('/index', fn() => view('examples.ejemplo.index'))->name('ejemplo.index');
-        Route::get('/create', fn() => view('examples.ejemplo.create'))->name('ejemplo.create');
-        Route::get('/edit', fn() => view('examples.ejemplo.edit'))->name('ejemplo.edit');
-        Route::get('/show', fn() => view('examples.ejemplo.show'))->name('ejemplo.show');
-    });
+    //Route::prefix('/ejemplo')->group(function () {
+        //Route::get('/index', fn() => view('examples.ejemplo.index'))->name('ejemplo.index');
+        //Route::get('/create', fn() => view('examples.ejemplo.create'))->name('ejemplo.create');
+        //Route::get('/edit', fn() => view('examples.ejemplo.edit'))->name('ejemplo.edit');
+        //::get('/show', fn() => view('examples.ejemplo.show'))->name('ejemplo.show');
+    //});
 
 
 
@@ -49,8 +46,10 @@ Route::middleware('auth')->group(function () {
         Route::post('/', [DeviceTypeController::class, 'store'])->name('devices_types.store');
         Route::get('/{device}/edit', [DeviceTypeController::class, 'edit'])->name('devices_types.edit');
         Route::put('/{device}', [DeviceTypeController::class, 'update'])->name('devices_types.update');
+        Route::get('/{device}/delete', [DeviceTypeController::class,'deleteConfirm'])->name('devices_types.delete');
         Route::delete('/{device}', [DeviceTypeController::class, 'destroy'])->name('devices_types.destroy');
         Route::get('/{device}', [DeviceTypeController::class, 'show'])->name('devices_types.show');
+
     });
 
     //Add the route for BrandController
@@ -60,6 +59,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/', [BrandController::class, 'store'])->name('brands.store');
         Route::get('/{brand}/edit', [BrandController::class, 'edit'])->name('brands.edit');
         Route::put('/{brand}', [BrandController::class, 'update'])->name('brands.update');
+        Route::get('/{brand}/delete', [BrandController::class, 'deleteConfirm'])->name('brands.delete');
         Route::delete('/{brand}', [BrandController::class, 'destroy'])->name('brands.destroy');
         Route::get('/{brand}', [BrandController::class, 'show'])->name('brands.show');
     });
@@ -71,6 +71,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/', [DeviceInventoryController::class, 'store'])->name('devices_inventories.store');
         Route::get('/{device_inventory}/edit', [DeviceInventoryController::class, 'edit'])->name('devices_inventories.edit');
         Route::put('/{device_inventory}', [DeviceInventoryController::class, 'update'])->name('devices_inventories.update');
+        Route::get('/{device_inventory}/delete', [DeviceInventoryController::class, 'deleteConfirm'])->name('devices_inventories.delete');
         Route::delete('/{device_inventory}', [DeviceInventoryController::class, 'destroy'])->name('devices_inventories.destroy');
         Route::get('/{device_inventory}', [DeviceInventoryController::class, 'show'])->name('devices_inventories.show');
     });
@@ -103,6 +104,10 @@ Route::middleware('auth')->group(function () {
 
     // Route::resource('/categories', CategoryController::class);
     // Route::resource('/animals', AnimalController::class);
+
+    Route::get('/confirm-password',[ConfirmablePasswordController::class,'show'])->name('password.confirm');
+
+    Route::post('/confirm-password',[ConfirmablePasswordController::class,'store']);
 });
 
 require __DIR__ . '/auth.php';

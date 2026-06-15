@@ -46,14 +46,9 @@
                                             style="margin-right: 5px;">
                                             <i class="fas fa-edit"></i> Editar
                                         </a>
-                                        <form action="{{ route('devices_types.destroy', $device_type->id) }}" method="POST"
-                                            style="display: inline-block; margin: 0; display: flex; align-items: center;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm">
-                                                <i class="fas fa-trash"></i> Eliminar
-                                            </button>
-                                        </form>
+                                        <a href="{{ route('devices_types.delete', $device_type->id) }}" class="btn btn-danger btn-sm">
+                                            <i class="fas fa-trash"></i> Eliminar
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

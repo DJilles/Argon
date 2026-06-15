@@ -7,6 +7,8 @@ use App\Models\Brand;
 use App\Models\DeviceInventory;
 use App\Models\DeviceType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class DeviceInventoryController extends Controller
 {
@@ -27,8 +29,9 @@ class DeviceInventoryController extends Controller
 
     public function store(DeviceInventoryRequest $request)
     {
+        $this->validatePassword($request);
         DeviceInventory::create($request->validated());
-        return redirect()->route('devices_inventories.index')->with('success','DeviceInventory creada.');
+        return redirect()->route('devices_inventories.index')->with('success','Agregado al inventario.');
     }
 
     public function show(string $id)
@@ -56,7 +59,7 @@ class DeviceInventoryController extends Controller
     {
         $device_inventory = DeviceInventory::findOrFail($id);
         $device_inventory->update($request->validated());
-        return redirect()->route('devices_inventories.index')->with('success','DeviceInventory actualizado.');
+        return redirect()->route('devices_inventories.index')->with('success','Inventario actualizado.');
     }
 
     //Mismo que los de tablas fuertes
@@ -64,7 +67,27 @@ class DeviceInventoryController extends Controller
     {
         $device_inventory = DeviceInventory::findOrFail($id);
         $device_inventory->delete();
-        return redirect()->route('devices_inventories.index')->with('success','DeviceInventory eliminado.');
+        return redirect()->route('devices_inventories.index')->with('success','Registro eliminado.');
+    }
+
+    public function deleteConfirm(string $id){
+        $device_inventory = DeviceInventory::findOrFail($id);
+
+        return view('DeviceInventory.delete', compact('device_inventory'));
+    }
+
+    private function validatePassword(Request $request){
+        $request->validate([
+            'password_confirmation' => 'required'
+        ], [
+            'password_confirmation.required' =>'Debe introducir su contraseña para ejectuar esta acción'
+        ]);
+
+        if (!Hash::check($request->password_confirmation, Auth::user()->password)){
+            abort(back()->withErrors([
+                'password_confirmation' => 'La contraseña ingresada no es correcta.'
+            ]))->withInput();
+        }
     }
 
 
