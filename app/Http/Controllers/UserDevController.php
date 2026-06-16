@@ -7,6 +7,8 @@ use App\Models\DeviceInventory;
 use App\Models\UserDev;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use PhpParser\Node\Expr\FuncCall;
 
 class UserDevController extends Controller
@@ -94,15 +96,39 @@ class UserDevController extends Controller
 
     public function update(UserDevRequest $request, string $id)
     {
+        $this->validatePassword($request);
+
         $user_dev = UserDev::findOrFail($id);
         $user_dev->update($request->validated());
-        return redirect()->route('users_devs.index')->with('success','UserDev actualizado.');
+        return redirect()->route('users_devs.index')->with('success','Usuario actualizado.');
     }
 
-    public function destroy(string $id)
+    public function destroy(Request $request,string $id)
     {
+        $this->validatePassword($request);
+
         $user_dev = UserDev::findOrFail($id);
         $user_dev->delete();
-        return redirect()->route('users_devs.index')->with('success','UserDev eliminado.');
+        return redirect()->route('users_devs.index')->with('success','Usuario eliminado.');
+    }
+
+    public function deleteConfirm(string $id){
+        $user_dev = UserDev::findOrFail($id);
+
+        return view('UserDev.delete', compact('user_dev'));
+    }
+
+    private function validatePassword(Request $request){
+        $request->validate([
+            'password_confirmation' => 'required'
+        ], [
+            'password_confirmation.required' =>'Debe introducir su contraseña para ejectuar esta acción'
+        ]);
+
+        if (!Hash::check($request->password_confirmation, Auth::user()->password)){
+            abort(back()->withErrors([
+                'password_confirmation' => 'La contraseña ingresada no es correcta.'
+            ]))->withInput();
+        }
     }
 }

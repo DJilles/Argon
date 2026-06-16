@@ -20,6 +20,8 @@
                                 <th scope="col"><i class="fas fa-list-ol"></i> ID</th>
                                 <th scope="col"><i class="fas fa-user"></i> Fecha de devolución</th>
                                 <th scope="col"><i class="fas fa-cubes"></i> Condición del equipo al devolverlo</th>
+                                <th scope="col"><i class="fas fa-cubes"></i> Equipo</th>
+                                <th scope="col"><i class="fas fa-cubes"></i> Número de Inventario</th>
                                 <th scope="col"><i class="fas fa-tags"></i> Nombre del Usuario</th>
                                 <th scope="col"><i class="fas fa-tags"></i> Apellido del Usuario</th>
                                 <th scope="col"><i class="fas fa-tags"></i> Cédula del Usuario</th>
@@ -38,6 +40,14 @@
 
                                     <td>
                                         {{ $check_in_log->return_condition }}
+                                    </td>
+
+                                    <td>
+                                        {{ $check_in_log->user_dev->device_inventory->model }}
+                                    </td>
+
+                                    <td>
+                                        {{ $check_in_log->user_dev->device_inventory->inv_num }}
                                     </td>
 
                                     <td>
@@ -62,14 +72,9 @@
                                             style="margin-right: 5px;">
                                             <i class="fas fa-edit"></i> Editar
                                         </a>
-                                        <form action="{{ route('check_in_logs.destroy', $check_in_log->id) }}" method="POST"
-                                            style="display: inline-block; margin: 0; display: flex; align-items: center;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm">
-                                                <i class="fas fa-trash"></i> Eliminar
-                                            </button>
-                                        </form>
+                                        <a href="{{ route('check_in_logs.delete', $check_in_log->id) }}" class="btn btn-danger btn-sm">
+                                            <i class="fas fa-trash"></i> Eliminar
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

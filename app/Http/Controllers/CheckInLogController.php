@@ -6,6 +6,8 @@ use App\Http\Requests\CheckInLogRequest;
 use App\Models\CheckInLog;
 use App\Models\UserDev;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class CheckInLogController extends Controller
 {
@@ -47,16 +49,41 @@ class CheckInLogController extends Controller
 
     public function update(CheckInLogRequest $request, string $id)
     {
+        $this->validatePassword($request);
+
         $check_in_log =CheckInLog::findOrFail($id);
         $check_in_log->update($request->validated());
-        return redirect()->route('check_in_log.index')->with('success','CheckInLog actualizado.');
+        return redirect()->route('check_in_logs.index')->with('success','Devolución actualizada.');
     }
 
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
+        $this->validatePassword($request);
+
         $check_in_log = CheckInLog::findOrFail($id);
         $check_in_log->delete();
-        return redirect()->route('check_in_log.index')->with('success','CheckInLog eliminado.');
+        return redirect()->route('check_in_logs.index')->with('success','Devolución eliminado.');
+    }
+
+    public function deleteConfirm(string $id){
+        $check_in_log = CheckInLog::findOrFail($id);
+
+        return view('CheckInLog.delete', compact('check_in_log'));
+    }
+
+
+    private function validatePassword(Request $request){
+        $request->validate([
+            'password_confirmation' => 'required'
+        ], [
+            'password_confirmation.required' =>'Debe introducir su contraseña para ejectuar esta acción'
+        ]);
+
+        if (!Hash::check($request->password_confirmation, Auth::user()->password)){
+            abort(back()->withErrors([
+                'password_confirmation' => 'La contraseña ingresada no es correcta.'
+            ]))->withInput();
+        }
     }
 
 }

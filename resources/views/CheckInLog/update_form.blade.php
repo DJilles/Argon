@@ -41,13 +41,24 @@
 
 <!-- Extra -->
 
+
+<!-- SE AGREGA CONTRASEÑA POR MOTIVOS DE SEGURIDAD -->
+<div class="form-group mt-3 col-lg-6">
+    <label for="password_confirmation" class="form-control-label">Confirma tu contraseña para autorizar esta acción</label>
+    <input type="password" name="password_confirmation" class="form-control" required placeholder="Escriba su contraseña">
+    @error("password_confirmation")
+        <small class="text-danger">{{ $message }}</small>
+    @enderror
+</div>
+
+
 <hr class="my-4" />
 <!-- Contenido -->
 <h6 class="heading-small text-muted mb-4">Guardar</h6>
 <div class="pl-lg-4">
     <div class="form-group">
         <button type="submit" class="btn btn-primary">
-            <i class="fas fa-exchange-alt"></i> Devolver Equipo
+            <i class="fas fa-sync"></i> Actualizar devolución
         </button>
     </div>
 </div>

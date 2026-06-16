@@ -81,10 +81,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/',[UserDevController::class, 'index'])->name('users_devs.index');
         Route::get('/create', [UserDevController::class, 'create'])->name('users_devs.create');
         Route::post('/', [UserDevController::class, 'store'])->name('users_devs.store');
-        Route::get('/{device_inventory}/edit', [UserDevController::class, 'edit'])->name('users_devs.edit');
-        Route::put('/{device_inventory}', [UserDevController::class, 'update'])->name('users_devs.update');
-        Route::delete('/{device_inventory}', [UserDevController::class, 'destroy'])->name('users_devs.destroy');
-        Route::get('/{device_inventory}', [UserDevController::class, 'show'])->name('users_devs.show');
+        Route::get('/{user_dev}/edit', [UserDevController::class, 'edit'])->name('users_devs.edit');
+        Route::put('/{user_dev}', [UserDevController::class, 'update'])->name('users_devs.update');
+        Route::get('/{user_dev}/delete', [UserDevController::class, 'deleteConfirm'])->name('users_devs.delete');
+        Route::delete('/{user_dev}', [UserDevController::class, 'destroy'])->name('users_devs.destroy');
+        Route::get('/{user_dev}', [UserDevController::class, 'show'])->name('users_devs.show');
     });
 
     //Add the route for CheckInLogController
@@ -94,6 +95,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/', [CheckInLogController::class, 'store'])->name('check_in_logs.store');
         Route::get('/{check_in_log}/edit', [CheckInLogController::class, 'edit'])->name('check_in_logs.edit');
         Route::put('/{check_in_log}', [CheckInLogController::class, 'update'])->name('check_in_logs.update');
+        Route::get('/{check_in_log}/delete', [CheckInLogController::class, 'deleteConfirm'])->name('check_in_logs.delete');
         Route::delete('/{check_in_log}', [CheckInLogController::class, 'destroy'])->name('check_in_logs.destroy');
         Route::get('/{check_in_log}', [CheckInLogController::class, 'show'])->name('check_in_logs.show');
     });

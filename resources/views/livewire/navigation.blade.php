@@ -79,11 +79,19 @@
                 <i class="fas fa-boxes text-yellow"></i> Inventario de dispositivos
             </a>
         </li>
+    </ul>
+
+    <!-- Divider -->
+    <hr class="my-3">
+    <!-- Heading -->
+    <h6 class="navbar-heading text-muted">USUARIOS</h6>
+    <!-- Navigation -->
+    <ul class="navbar-nav mb-md-3">
 
         <li class="nav-item {{ Request::route()->named('users_devs.index') ? 'active':'' }}">
             <a  class="nav-link {{ Request::route()->named('users_devs.index') ? 'active' : '' }}"
                 href="{{ route('users_devs.index') }}" wire:navigate>
-                <i class="fas fa-user text-green"></i> Usuarios (Préstamos)
+                <i class="fas fa-user text-green"></i> Pedir Prestado un Equipo
             </a>
         </li>
 
